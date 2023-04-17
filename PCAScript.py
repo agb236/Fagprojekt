@@ -17,7 +17,7 @@ diabetes = load_diabetes()
 digits =  load_digits()
 
 X = iris.data
-X_pca, eigenvectors, explained_variance,S = pca(X, 2, "svd")
+X_pca, eigenvectors, explained_variance = pca(X, 2, "svd")
 
 
 
