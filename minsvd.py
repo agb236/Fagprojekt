@@ -43,6 +43,22 @@ def MinSVDTrunc(X,k):
 
     return U[:,:k],sigma[:k],np.conjugate(V[:,:k]).T
 
+def rsvd(X,k):
+    
+    # We sample the column space of X by generating the p-matrix
+    n_c = X.shape[1]
+    p = np.random.randn(n_c,k)
+    Z = X@p
+    
+    Q, R = np.linalg.qr(Z,mode = "reduced")
+    
+    # Compute the SVD
+    Y = Q.T@X
+    U_tilde, Sigma, VT = np.linalg.svd(Y,full_matrices=0)
+    U = Q@U_tilde
+
+    return U, Sigma, VT
+
 """ def my_svd(A):
     # Compute the eigenvalues and eigenvectors of A^T A
     AtA = np.dot(A.T, A)
