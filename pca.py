@@ -1,5 +1,5 @@
 import numpy as np
-from minsvd import MinSVDTrunc, my_svd
+from minsvd import MinSVDTrunc, my_svd, rsvd
 def pca(X, n_components,method,k=None):
     """
     PCA on a data matrix X using SVD
@@ -40,11 +40,16 @@ def pca(X, n_components,method,k=None):
         U, singular_values, V_T = np.linalg.svd(X)
     elif method == "svd":
         U, singular_values, V_T = my_svd(X)
+    elif method == "rsvd":
+        if k is None:
+            raise ValueError("Input fourth argument specifying k in the randomized SVD")
+        else:
+            U, singular_values, V_T = rsvd(X,k)
     elif method == "trunc":
         if k is None:
             raise ValueError("Input fourth argument specifying k in the truncated SVD")
         else:
-            U, singular_values, V_T = MinSVDTrunc(X,4)
+            U, singular_values, V_T = MinSVDTrunc(X,k)
     else:
         raise ValueError("Please input a valid SVD method")
     
