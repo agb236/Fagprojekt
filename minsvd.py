@@ -53,11 +53,12 @@ def rsvd(X,k):
     Q, R = np.linalg.qr(Z,mode = "reduced")
     
     # Compute the SVD
-    Y = Q.T@X
+    Y = Q.T @ X
     U_tilde, Sigma, VT = np.linalg.svd(Y,full_matrices=0)
     U = Q@U_tilde
 
     return U, Sigma, VT
+
 
 """ def my_svd(A):
     # Compute the eigenvalues and eigenvectors of A^T A
@@ -87,14 +88,21 @@ def rsvd(X,k):
     return U, Sigma, V.T """
 
 # Example usage:
-A = np.array([[2,1,8],[0,2,8],[1,1,0]])
-U, Sigma, Vt = my_svd(A)
-print("U:\n", U)
+#from sklearn.datasets import load_diabetes, load_digits,load_iris
+#A = np.array([[2,1,8,4,7,2,4,6],[0,2,8,5,6,9,1,3],[1,1,0,4,2,8,7,6]])
+#iris = load_iris()
+#X = iris.data
+#U, Sigma, Vt = rsvd(X,2)
+#print("U:\n", U)
 #print("Sigma:\n", Sigma)
 #print("Vt:\n", Vt)
 #print("A = ",np.dot(np.dot(U,Sigma),Vt))
-U_true, Sigma_true, Vt_true = np.linalg.svd(A,full_matrices=True, compute_uv=True)
-print("U true:\n", U_true)
+#U_true, Sigma_true, Vt_true = np.linalg.svd(X,full_matrices=0, compute_uv=True)
+#print("U true:\n", U_true)
 #print("Sigma true:\n", Sigma_true)
 #print("Vt true:\n", Vt_true)
 #print("A = ",np.dot(np.dot(U_true,np.diag(Sigma_true)),Vt_true))
+#print(np.mean((U_true-U) ** 2))
+
+
+
